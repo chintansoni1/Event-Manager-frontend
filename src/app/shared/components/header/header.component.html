@@ -1,0 +1,17 @@
+<div class="header-container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <a routerLink="./" class="logo"><img src="assets/images/download.png"></a>
+      <span class="spacer"></span>
+      <div class="navigation-links-container">
+
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="'events/create'">
+          <span class="sidebar-icon">Create Event</span>
+        </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="'events/invites'">
+          <span class="sidebar-icon">Invites</span>
+        </a>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

@@ -1,0 +1,25 @@
+.registration-card {
+  width: 400px;
+  margin: 8% auto;
+
+  .mat-card-title {
+    font-size: 16px;
+  }
+}
+
+.registration-form {
+  .form-field-full-width {
+    width: 100%;
+  }
+
+  .form-error {
+    font-size: 12px;
+  }
+}
+
+.registration-btn {
+  width: 100%;
+  margin-top: 32px;
+  padding: 4px;
+  text-transform: uppercase;
+}

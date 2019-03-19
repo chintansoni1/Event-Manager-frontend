@@ -1,0 +1,35 @@
+<app-static-header></app-static-header>
+<mat-card class="login-card">
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="loginForm" class="login-form">
+      <mat-form-field class="form-field-full-width">
+        <input matInput formControlName="emailId" type="email" required placeholder="Email" />
+      </mat-form-field>
+      <mat-error class="form-error" *ngIf="
+          !!loginForm.controls.emailId.value &&
+          !loginForm.controls.emailId.valid
+        ">
+        Please enter a valid email address
+      </mat-error>
+      <mat-form-field class="form-field-full-width">
+        <input matInput formControlName="password" required type="password" placeholder="Password" />
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <mat-error class="form-error" *ngIf="isLoginError">Username or Password is wrong.</mat-error>
+    <button class="login-btn" mat-raised-button [disabled]="!loginForm.valid" color="primary" (click)="login()">
+      Login
+    </button>
+    <p>Not a member?
+      <a href="/register">Register</a>
+    </p>
+    <div>
+      <!-- Forgot password -->
+      <a href="/forgot-password">Forgot password?</a>
+    </div>
+  </mat-card-actions>
+</mat-card>

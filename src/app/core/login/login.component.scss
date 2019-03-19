@@ -1,0 +1,25 @@
+.login-card {
+  width: 400px;
+  margin: 10% auto;
+
+  .mat-card-title {
+    font-size: 16px;
+  }
+}
+
+.login-form {
+  .form-field-full-width {
+    width: 100%;
+  }
+
+  .form-error {
+    font-size: 12px;
+  }
+}
+
+.login-btn {
+  width: 100%;
+  margin-top: 32px;
+  padding: 4px;
+  text-transform: uppercase;
+}

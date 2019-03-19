@@ -1,0 +1,63 @@
+<div class="container">
+  <mat-card class="add-event-card">
+    <mat-card-header>
+      <mat-card-title>Create Event</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="addEventForm" class="add-event-form">
+        <mat-form-field class="form-field-full-width">
+          <input matInput formControlName="name" type="text" required placeholder="Event Name" />
+        </mat-form-field>
+        <mat-error class="form-error" *ngIf="
+            !!addEventForm.controls.name.value &&
+            !addEventForm.controls.name.valid
+          ">
+          Please enter a valid name
+        </mat-error>
+        <mat-form-field class="form-field-full-width">
+          <textarea matInput formControlName="description" required placeholder="Description"></textarea>
+        </mat-form-field>
+        <mat-error class="form-error" *ngIf="
+            !!addEventForm.controls.description.value &&
+            !addEventForm.controls.description.valid
+          ">
+          Please enter a valid description
+        </mat-error>
+        <div class="date-picker-container">
+          <mat-form-field class="form-field-half-width">
+            <input matInput [matDatepicker]="startDatePicker" formControlName="startDate" placeholder="Choose start date" />
+            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="form-field-half-width">
+            <input matInput [matDatepicker]="endDatePicker" formControlName="endDate" placeholder="Choose end date" />
+            <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #endDatePicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <mat-form-field class="form-field-full-width">
+          <mat-chip-list #chipList>
+            <mat-chip *ngFor="let user of selectedUsers" [selectable]="selectable" [removable]="removable" (removed)="remove(user)">
+              {{ user.name }}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Invite User..." #inviteUserInput [formControl]="inviteUserCtrl" [matAutocomplete]="auto"
+              [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)" />
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let user of (filteredUsers | async)" [value]="user">
+              {{ user?.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <mat-error class="form-error" *ngIf="isServerError">Some error occured. Please try again.</mat-error>
+      <button class="reset-password-btn" mat-raised-button [disabled]="!addEventForm.valid" color="primary" (click)="addEvent()">
+        Create Event
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

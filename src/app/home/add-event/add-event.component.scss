@@ -1,0 +1,31 @@
+.container {
+  margin: 8% auto;
+
+  .add-event-card {
+    width: 50%;
+    margin: 0 auto;
+
+    .mat-card-title {
+      font-size: 16px;
+    }
+  }
+
+  .date-picker-container {
+    display: flex;
+    justify-content: space-between;
+
+    .form-field-half-width {
+      width: 40%;
+    }
+  }
+}
+
+.add-event-form {
+  .form-field-full-width {
+    width: 100%;
+  }
+
+  .form-error {
+    font-size: 12px;
+  }
+}

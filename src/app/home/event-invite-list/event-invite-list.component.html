@@ -1,0 +1,45 @@
+<div class="table-container">
+  <mat-form-field *ngIf="isRecordFound && !isServerError">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" />
+  </mat-form-field>
+  <table mat-table *ngIf="isRecordFound && !isServerError" [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+      <td mat-cell *matCellDef="let element">{{ element.index }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="startDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
+      <td mat-cell *matCellDef="let element">{{ element.startDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="endDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
+      <td mat-cell *matCellDef="let element">{{ element.endDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="organizer">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Organizer</th>
+      <td mat-cell *matCellDef="let element">{{ element.organizer }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator *ngIf="isRecordFound && !isServerError" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons></mat-paginator>
+  <mat-card *ngIf="!isRecordFound">
+    No results
+  </mat-card>
+  <mat-error class="form-error" *ngIf="isServerError">Some error occured while fetching records.</mat-error>
+</div>
