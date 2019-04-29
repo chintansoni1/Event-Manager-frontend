@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthenticationService } from "../services/authentication/authentication.service";
 import { MatSnackBar } from "@angular/material";
 import { ActivatedRoute } from "@angular/router";
+import { AppService } from "../../services/app.service";
 
 @Component({
   selector: "app-reset-password",
@@ -16,9 +17,11 @@ export class ResetPasswordComponent implements OnInit {
   constructor(
     private authService: AuthenticationService,
     private snackBar: MatSnackBar,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private appService: AppService
   ) {
-    this.token = this.route.snapshot.params.param1;
+    this.token = this.route.snapshot.params.token;
+    this.appService.setToken(this.token);
     this.initResetPasswordForm();
   }
 
@@ -37,7 +40,7 @@ export class ResetPasswordComponent implements OnInit {
     this.isError = false;
     let data = this.resetPasswordForm.value;
     data.token = this.token;
-    this.authService.forgotPassword(data).subscribe(
+    this.authService.resetPassword(data).subscribe(
       (res: any) => {
         this.openSnackBar("Password has been reset successfully", "Ok");
       },
